@@ -35,7 +35,7 @@ public class EmployeeVaccination {
     private short vaccinationBrand;
 
     @Column(name = "vaccination_count")
-    private short vaccinationStatus;
+    private short vaccinationCount;
 
     @Column(name = "created_at")
     private LocalDate createdAt;

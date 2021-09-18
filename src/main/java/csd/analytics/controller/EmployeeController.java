@@ -4,6 +4,8 @@ import csd.analytics.exception.EmployeeNotFoundException;
 import csd.analytics.exception.ResourceNotFoundException;
 import csd.analytics.model.Employee;
 import csd.analytics.service.EmployeeService;
+
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -33,6 +35,15 @@ public class EmployeeController {
             return new ResponseEntity<>(employeeService.getEmployeeById(id), HttpStatus.OK);
         } catch (ResourceNotFoundException e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @DeleteMapping("/employees/{id}")
+    public void delete(@PathVariable(value = "employeeId") UUID id) {
+        try {
+            employeeService.deleteEmployeeByid(id);
+        } catch (EmptyResultDataAccessException e) {
+            throw new EmployeeNotFoundException(id);
         }
     }
 

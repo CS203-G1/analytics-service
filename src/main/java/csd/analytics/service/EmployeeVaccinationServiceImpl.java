@@ -34,7 +34,12 @@ public class EmployeeVaccinationServiceImpl implements EmployeeVaccinationServic
 
     @Override
     public List<EmployeeVaccination> getEmployeeVaccinations(UUID employeeId) {
-        throw new NotYetImplementedException();
+        List<EmployeeVaccination> employeeVaccination = employeeVaccinationRepository.findByEmployeeId(employeeId);
+
+        if (employeeVaccination.isEmpty()) {
+            throw new EmployeeVaccinationNotFoundException(employeeId);
+        }
+        return employeeVaccination;
     }
 
     @Override

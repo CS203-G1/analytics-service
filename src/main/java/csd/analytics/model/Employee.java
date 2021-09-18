@@ -32,13 +32,13 @@ public class Employee {
     private UUID id;
 
     @Column(name = "vaccination_status")
-    private short vaccination_status;
+    private short vaccinationStatus;
 
     @Column(name = "vaccination_brand")
-    private short vaccination_brand;
+    private short vaccinationBrand;
 
     @Column(name = "health_status")
-    private short health_status;
+    private short healthStatus;
 
     @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
     private List<EmployeeVaccination> employeeVaccinations;

@@ -29,11 +29,11 @@ public class EmployeeVaccination {
     private Employee employee;
 
     @Column(name = "vaccination_brand")
-    private short vaccination_brand;
+    private short vaccinationBrand;
 
     @Column(name = "vaccination_count")
-    private short vaccination_status;
+    private short vaccinationStatus;
 
     @Column(name = "created_at")
-    private LocalDate created_at;
+    private LocalDate createdAt;
 }

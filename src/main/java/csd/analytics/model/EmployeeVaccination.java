@@ -1,9 +1,12 @@
 package csd.analytics.model;
 
 import java.time.LocalDate;
+import java.util.UUID;
 
 import javax.persistence.Entity;
 import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -24,9 +27,9 @@ import lombok.ToString;
 @EqualsAndHashCode
 public class EmployeeVaccination {
     @Id
-    @ManyToOne
-    @JoinColumn(name = "employee_id")
-    private Employee employee;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
+    private UUID id;
 
     @Column(name = "vaccination_brand")
     private short vaccinationBrand;
@@ -36,4 +39,8 @@ public class EmployeeVaccination {
 
     @Column(name = "created_at")
     private LocalDate createdAt;
+
+    @ManyToOne
+    @JoinColumn(name = "employee_id")
+    private Employee employee;
 }

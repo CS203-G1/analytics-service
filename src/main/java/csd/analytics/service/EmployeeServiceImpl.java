@@ -34,8 +34,14 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public Employee updateEmployeeByid(UUID id, Employee employee) {
-        throw new NotYetImplementedException();
+    public Employee updateEmployeeByid(UUID id, Employee employee) {;
+        return employeeRepository.findById(id).map(oldEmployee -> {
+            oldEmployee.setVaccinationStatus(employee.getVaccinationStatus());
+            oldEmployee.setVaccinationBrand(employee.getVaccinationBrand());
+            oldEmployee.setHealthStatus(employee.getHealthStatus());
+
+            return employeeRepository.save(oldEmployee);
+        }).orElseThrow(() -> new EmployeeNotFoundException(id));
     }
 
     @Override

@@ -1,0 +1,11 @@
+# Get all employees
+GET http://localhost:8080/employees
+
+###
+# Add an employee
+POST http://localhost:8080/employees
+Content-Type: application/json
+
+{
+    "name": "John"
+}

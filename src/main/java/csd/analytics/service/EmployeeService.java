@@ -14,5 +14,5 @@ public interface EmployeeService {
 
     Employee updateEmployeeByid(UUID id, Employee employee);
 
-    Employee deleteEmployeeByid(UUID id);
+    void deleteEmployeeByid(UUID id);
 }

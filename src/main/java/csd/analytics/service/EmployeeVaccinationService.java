@@ -10,7 +10,9 @@ public interface EmployeeVaccinationService {
 
     List<EmployeeVaccination> getEmployeeVaccinations(UUID employeeId);
 
-    // EmployeeVaccination updateEmployeeVaccination(UUID employeeId, EmployeeVaccination employeeVaccination);
+    EmployeeVaccination getEmployeeVaccination(UUID employeeId, UUID employeeVaccinationId);
 
-    // void deleteEmployeeVaccination(UUID employeeId);
+    EmployeeVaccination updateEmployeeVaccination(UUID employeeId, UUID employeeVaccinationId, EmployeeVaccination employeeVaccination);
+
+    void deleteEmployeeVaccination(UUID employeeId, UUID employeeVaccinationId);
 }

@@ -55,6 +55,8 @@ public class EmployeeVaccinationServiceImpl implements EmployeeVaccinationServic
 
     @Override
     public void deleteEmployeeVaccination(UUID employeeId, UUID employeeVaccinationId) {
-        throw new NotYetImplementedException();
+        EmployeeVaccination employeeVaccination = getEmployeeVaccination(employeeId, employeeVaccinationId);
+
+        employeeVaccinationRepository.delete(employeeVaccination);
     }
 }

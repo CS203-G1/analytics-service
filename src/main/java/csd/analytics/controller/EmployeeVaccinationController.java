@@ -30,4 +30,9 @@ public class EmployeeVaccinationController {
                             @PathVariable(value = "employeeVaccinationId") UUID employeeVaccinationId) {
         return employeeVaccinationService.getEmployeeVaccination(employeeId, employeeVaccinationId);
     }
+
+    @GetMapping("/employees/{employeeId}/employee-vaccinations")
+    public List<EmployeeVaccination> getEmployeeVaccinations(@PathVariable(value = "employeeId") UUID employeeId) {
+        return employeeVaccinationService.getEmployeeVaccinations(employeeId);
+    }
 }

@@ -30,24 +30,24 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public Employee getEmployeeById(UUID id) {
-        return employeeRepository.findById(id).orElseThrow(() -> new EmployeeNotFoundException(id));
+    public Employee getEmployeeById(UUID employeeId) {
+        return employeeRepository.findById(employeeId).orElseThrow(() -> new EmployeeNotFoundException(employeeId));
     }
 
     @Override
-    public Employee updateEmployeeByid(UUID id, Employee employee) {
-        return employeeRepository.findById(id).map(oldEmployee -> {
+    public Employee updateEmployeeByid(UUID employeeId, Employee employee) {
+        return employeeRepository.findById(employeeId).map(oldEmployee -> {
             oldEmployee.setVaccinationStatus(employee.getVaccinationStatus());
             oldEmployee.setVaccinationBrand(employee.getVaccinationBrand());
             oldEmployee.setHealthStatus(employee.getHealthStatus());
 
             return employeeRepository.save(oldEmployee);
-        }).orElseThrow(() -> new EmployeeNotFoundException(id));
+        }).orElseThrow(() -> new EmployeeNotFoundException(employeeId));
     }
 
     @Override
-    public void deleteEmployeeByid(UUID id) {
-        Employee employee = getEmployeeById(id);
+    public void deleteEmployeeByid(UUID employeeId) {
+        Employee employee = getEmployeeById(employeeId);
         
         employeeRepository.delete(employee);
     }

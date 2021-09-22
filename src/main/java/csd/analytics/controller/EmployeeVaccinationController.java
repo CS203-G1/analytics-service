@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,7 +12,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import csd.analytics.exception.EmployeeVaccinationNotFoundException;
 import csd.analytics.model.EmployeeVaccination;
 import csd.analytics.service.EmployeeVaccinationService;
 
@@ -53,10 +51,6 @@ public class EmployeeVaccinationController {
     @DeleteMapping("/employees/{employeeId}/employee-vaccinations/{employeeVaccinationId}")
     public void deleteEmployeeVaccination(@PathVariable(value = "employeeId") UUID employeeId,
                             @PathVariable(value = "employeeVaccinationId") UUID employeeVaccinationId) {
-        try {
-            employeeVaccinationService.deleteEmployeeVaccination(employeeId, employeeVaccinationId);
-        } catch (EmptyResultDataAccessException e) {
-            throw new EmployeeVaccinationNotFoundException(employeeVaccinationId, employeeId);
-        }
+        employeeVaccinationService.deleteEmployeeVaccination(employeeId, employeeVaccinationId);
     }
 }

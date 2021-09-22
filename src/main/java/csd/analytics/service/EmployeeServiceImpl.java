@@ -3,6 +3,7 @@ package csd.analytics.service;
 import java.util.List;
 import java.util.UUID;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import csd.analytics.exception.EmployeeNotFoundException;
@@ -13,6 +14,7 @@ import csd.analytics.repository.EmployeeRepository;
 public class EmployeeServiceImpl implements EmployeeService {
     private EmployeeRepository employeeRepository;
 
+    @Autowired
     public EmployeeServiceImpl(EmployeeRepository employeeRepository) {
         this.employeeRepository = employeeRepository;
     }

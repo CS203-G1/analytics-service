@@ -41,4 +41,11 @@ public class EmployeeVaccinationController {
                             @RequestBody EmployeeVaccination employeeVaccination) {
         return employeeVaccinationService.addEmployeeVaccination(employeeId, employeeVaccination);
     }
+
+    @PutMapping("/employees/{employeeId}/employee-vaccination/{employeeVaccinationId}")
+    public EmployeeVaccination updateEmployeeVaccination(@PathVariable(value = "employeeId") UUID employeeId,
+                            @PathVariable(value = "employeeVaccinationId") UUID employeeVaccinationId,
+                            @RequestBody EmployeeVaccination employeeVaccination) {
+        return employeeVaccinationService.updateEmployeeVaccination(employeeId, employeeVaccinationId, employeeVaccination);
+    }
 }

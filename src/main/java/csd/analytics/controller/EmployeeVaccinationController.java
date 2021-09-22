@@ -25,7 +25,7 @@ public class EmployeeVaccinationController {
         this.employeeVaccinationService = employeeVaccinationService;
     }
 
-    @GetMapping("/employees/{employeeId}/employee-vaccination/{employeeVaccinationId}")
+    @GetMapping("/employees/{employeeId}/employee-vaccinations/{employeeVaccinationId}")
     public EmployeeVaccination getEmployeeVaccination(@PathVariable(value = "employeeId") UUID employeeId,
                             @PathVariable(value = "employeeVaccinationId") UUID employeeVaccinationId) {
         return employeeVaccinationService.getEmployeeVaccination(employeeId, employeeVaccinationId);
@@ -42,10 +42,20 @@ public class EmployeeVaccinationController {
         return employeeVaccinationService.addEmployeeVaccination(employeeId, employeeVaccination);
     }
 
-    @PutMapping("/employees/{employeeId}/employee-vaccination/{employeeVaccinationId}")
+    @PutMapping("/employees/{employeeId}/employee-vaccinations/{employeeVaccinationId}")
     public EmployeeVaccination updateEmployeeVaccination(@PathVariable(value = "employeeId") UUID employeeId,
                             @PathVariable(value = "employeeVaccinationId") UUID employeeVaccinationId,
                             @RequestBody EmployeeVaccination employeeVaccination) {
         return employeeVaccinationService.updateEmployeeVaccination(employeeId, employeeVaccinationId, employeeVaccination);
+    }
+
+    @DeleteMapping("/employees/{employeeId}/employee-vaccinations/{employeeVaccinationId}")
+    public void deleteEmployeeVaccination(@PathVariable(value = "employeeId") UUID employeeId,
+                            @PathVariable(value = "employeeVaccinationId") UUID employeeVaccinationId) {
+        try {
+            employeeVaccinationService.deleteEmployeeVaccination(employeeId, employeeVaccinationId);
+        } catch (EmptyResultDataAccessException e) {
+            throw new EmployeeVaccinationNotFoundException(employeeVaccinationId, employeeId);
+        }
     }
 }

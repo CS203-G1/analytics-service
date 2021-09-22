@@ -11,8 +11,6 @@ import csd.analytics.model.EmployeeVaccination;
 import csd.analytics.model.Employee;
 import csd.analytics.repository.EmployeeVaccinationRepository;
 
-import org.hibernate.cfg.NotYetImplementedException;
-
 @Service
 public class EmployeeVaccinationServiceImpl implements EmployeeVaccinationService {
     private EmployeeVaccinationRepository employeeVaccinationRepository;

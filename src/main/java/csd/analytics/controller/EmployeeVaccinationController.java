@@ -17,6 +17,7 @@ import csd.analytics.exception.EmployeeVaccinationNotFoundException;
 import csd.analytics.model.EmployeeVaccination;
 import csd.analytics.service.EmployeeVaccinationService;
 
+@RestController
 public class EmployeeVaccinationController {
     private EmployeeVaccinationService employeeVaccinationService;
 

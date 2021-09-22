@@ -35,4 +35,10 @@ public class EmployeeVaccinationController {
     public List<EmployeeVaccination> getEmployeeVaccinations(@PathVariable(value = "employeeId") UUID employeeId) {
         return employeeVaccinationService.getEmployeeVaccinations(employeeId);
     }
+
+    @PostMapping("/employees/{employeeId}/employee-vaccinations")
+    public EmployeeVaccination addEmployeeVaccination(@PathVariable(value = "employeeId") UUID employeeId,
+                            @RequestBody EmployeeVaccination employeeVaccination) {
+        return employeeVaccinationService.addEmployeeVaccination(employeeId, employeeVaccination);
+    }
 }

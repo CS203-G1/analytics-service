@@ -12,6 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.validation.constraints.NotNull;
 import csd.analytics.enumerator.VaccinationBrand;
 
 import lombok.AllArgsConstructor;
@@ -32,19 +33,24 @@ public class EmployeeVaccination {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
+    @NotNull(message = "ID must not be null")
     private UUID id;
 
     @ManyToOne
     @JoinColumn(name = "employee_id")
+    @NotNull(message = "Employee must not be null")
     private Employee employee;
 
+    @NotNull(message = "VaccinationBrand must not be null")
     @Enumerated(EnumType.ORDINAL)
     @Column(name = "vaccination_brand")
     private VaccinationBrand vaccinationBrand;
 
+    @NotNull(message = "VaccinationCount must not be null")
     @Column(name = "vaccination_count")
     private short vaccinationCount;
 
+    @NotNull(message = "CreatedAt must not be null")
     @Column(name = "created_at")
     private LocalDate createdAt;
 }

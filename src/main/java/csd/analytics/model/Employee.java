@@ -12,11 +12,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotNull;
 
 import csd.analytics.enumerator.HealthStatus;
-import csd.analytics.enumerator.VaccinationStatus;
 import csd.analytics.enumerator.VaccinationBrand;
-
+import csd.analytics.enumerator.VaccinationStatus;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -35,11 +35,13 @@ public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
+    @NotNull(message = "ID must not be null")
     private UUID id;
 
     @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
     private List<EmployeeVaccination> employeeVaccinations;
 
+    @NotNull(message = "VaccinationStatus must not be null")
     @Enumerated(EnumType.ORDINAL)
     @Column(name = "vaccination_status")
     private VaccinationStatus vaccinationStatus;
@@ -48,6 +50,7 @@ public class Employee {
     @Column(name = "vaccination_brand")
     private VaccinationBrand vaccinationBrand;
 
+    @NotNull(message = "HealthStatus must not be null")
     @Enumerated(EnumType.ORDINAL)
     @Column(name = "health_status")
     private HealthStatus healthStatus;

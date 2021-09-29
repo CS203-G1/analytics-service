@@ -31,6 +31,9 @@ public class Employee {
     @Column(name = "id")
     private UUID id;
 
+    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
+    private List<EmployeeVaccination> employeeVaccinations;
+
     @Column(name = "vaccination_status")
     private short vaccinationStatus;
 
@@ -39,7 +42,4 @@ public class Employee {
 
     @Column(name = "health_status")
     private short healthStatus;
-
-    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
-    private List<EmployeeVaccination> employeeVaccinations;
 }

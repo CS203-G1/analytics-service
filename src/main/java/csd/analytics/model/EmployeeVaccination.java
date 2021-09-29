@@ -31,6 +31,10 @@ public class EmployeeVaccination {
     @Column(name = "id")
     private UUID id;
 
+    @ManyToOne
+    @JoinColumn(name = "employee_id")
+    private Employee employee;
+
     @Column(name = "vaccination_brand")
     private short vaccinationBrand;
 
@@ -39,8 +43,4 @@ public class EmployeeVaccination {
 
     @Column(name = "created_at")
     private LocalDate createdAt;
-
-    @ManyToOne
-    @JoinColumn(name = "employee_id")
-    private Employee employee;
 }

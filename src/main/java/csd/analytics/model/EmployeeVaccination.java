@@ -1,20 +1,24 @@
 package csd.analytics.model;
 
-import java.time.LocalDate;
+import java.util.Date;
 import java.util.UUID;
 
-import javax.persistence.Entity;
 import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
-import csd.analytics.enumerator.VaccinationBrand;
 
+import org.hibernate.annotations.CreationTimestamp;
+
+import csd.analytics.enumerator.VaccinationBrand;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -33,7 +37,6 @@ public class EmployeeVaccination {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
-    @NotNull(message = "ID must not be null")
     private UUID id;
 
     @ManyToOne
@@ -48,9 +51,10 @@ public class EmployeeVaccination {
 
     @NotNull(message = "VaccinationCount must not be null")
     @Column(name = "vaccination_count")
-    private short vaccinationCount;
+    private int vaccinationCount;
 
-    @NotNull(message = "CreatedAt must not be null")
+    @CreationTimestamp
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "created_at")
-    private LocalDate createdAt;
+    private Date createdAt;
 }

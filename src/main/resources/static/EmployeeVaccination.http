@@ -1,3 +1,38 @@
 # Get all vaccinations from an employee
-GET http://localhost:8080/employees/4342b824-423a-4274-883e-009643ed9186/employee-vaccinations
+GET http://localhost:8080/employees/d6d04eb8-83e8-47bb-af10-393b457499f3/employee-vaccinations
 
+###
+# Add employee vaccination
+# TODO: Check request
+POST http://localhost:8080/employees/d6d04eb8-83e8-47bb-af10-393b457499f3/employee-vaccinations
+Content-Type: application/json
+
+{
+    "employee": {
+        "vaccinationStatus": 2,
+        "vaccinationBrand": 2,
+        "healthStatus": 1,
+        "employeeVaccinations": null,
+    },
+    "vaccinationCount": 1,
+    "vaccinationBrand": 2
+}
+
+###
+# Update employee vaccination
+# TODO: Check request
+PUT http://localhost:8080/employees/4342b824-423a-4274-883e-009643ed9186
+
+Content-Type: application/json
+{
+    "vaccinationStatus": 1,
+    "vaccinationBrand": 1,
+    "healthStatus": 1,
+    "employeeVaccinations": null
+}
+
+###
+# Delete employee vaccination by ID
+# TODO: Check request
+DELETE http://localhost:8080/employees/4342b824-423a-4274-883e-009643ed9186/employee-vaccinations/840468c0-335b-4ade-841c-ab11211f4483
+Content-Type: application/json

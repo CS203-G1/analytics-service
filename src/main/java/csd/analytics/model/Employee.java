@@ -35,7 +35,6 @@ public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
-    @NotNull(message = "ID must not be null")
     private UUID id;
 
     @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)

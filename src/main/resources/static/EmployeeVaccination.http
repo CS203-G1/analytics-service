@@ -1,0 +1,3 @@
+# Get all vaccinations from an employee
+GET http://localhost:8080/employees/4342b824-423a-4274-883e-009643ed9186/employee-vaccinations
+

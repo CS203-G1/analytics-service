@@ -41,7 +41,6 @@ public class EmployeeVaccination {
 
     @ManyToOne
     @JoinColumn(name = "employee_id")
-    @NotNull(message = "Employee must not be null")
     private Employee employee;
 
     @NotNull(message = "VaccinationBrand must not be null")

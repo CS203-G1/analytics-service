@@ -1,4 +1,5 @@
 # Get all vaccinations from an employee
+# TODO: Check request
 GET http://localhost:8080/employees/d6d04eb8-83e8-47bb-af10-393b457499f3/employee-vaccinations
 
 ###
@@ -8,12 +9,6 @@ POST http://localhost:8080/employees/d6d04eb8-83e8-47bb-af10-393b457499f3/employ
 Content-Type: application/json
 
 {
-    "employee": {
-        "vaccinationStatus": 2,
-        "vaccinationBrand": 2,
-        "healthStatus": 1,
-        "employeeVaccinations": null,
-    },
     "vaccinationCount": 1,
     "vaccinationBrand": 2
 }

@@ -3,6 +3,8 @@ package csd.analytics.controller;
 import java.util.List;
 import java.util.UUID;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,7 +27,7 @@ public class EmployeeController {
     }
 
     @PostMapping("/employees")
-    public Employee addEmployee(@RequestBody Employee employee) {
+    public Employee addEmployee(@Valid @RequestBody Employee employee) {
         return employeeService.addEmployee(employee);
     }
 
@@ -46,7 +48,7 @@ public class EmployeeController {
 
     @PutMapping("/employees/{employeeId}")
     public Employee updateEmployee(@PathVariable(value = "employeeId") UUID employeeId,
-                                    @RequestBody Employee employee) {
+                                    @Valid @RequestBody Employee employee) {
         return employeeService.updateEmployeeById(employeeId, employee);
     }
 }

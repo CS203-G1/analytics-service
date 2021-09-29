@@ -35,7 +35,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public Employee updateEmployeeByid(UUID employeeId, Employee employee) {
+    public Employee updateEmployeeById(UUID employeeId, Employee employee) {
         return employeeRepository.findById(employeeId).map(oldEmployee -> {
             oldEmployee.setVaccinationStatus(employee.getVaccinationStatus());
             oldEmployee.setVaccinationBrand(employee.getVaccinationBrand());
@@ -46,7 +46,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public void deleteEmployeeByid(UUID employeeId) {
+    public void deleteEmployeeById(UUID employeeId) {
         Employee employee = getEmployeeById(employeeId);
         
         employeeRepository.delete(employee);

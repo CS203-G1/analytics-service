@@ -15,5 +15,5 @@ Content-Type: application/json
 
 ###
 # Delete an employee
-DELETE http://localhost:8080/employees/8b36b3c9-7cd5-4e43-b74a-a224f57331f4
+DELETE http://localhost:8080/employees/97a59744-ad57-4de7-ba87-0bf00c618c36
 Content-Type: application/json

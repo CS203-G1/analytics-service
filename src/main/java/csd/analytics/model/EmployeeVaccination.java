@@ -16,6 +16,8 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import org.hibernate.annotations.CreationTimestamp;
 
 import csd.analytics.enumerator.VaccinationBrand;
@@ -41,6 +43,7 @@ public class EmployeeVaccination {
 
     @ManyToOne
     @JoinColumn(name = "employee_id")
+    @ToString.Exclude
     private Employee employee;
 
     @NotNull(message = "VaccinationBrand must not be null")

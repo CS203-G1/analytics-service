@@ -47,9 +47,7 @@ public class EmployeeVaccinationController {
     public EmployeeVaccination updateEmployeeVaccination(@PathVariable(value = "employeeId") UUID employeeId,
                             @PathVariable(value = "employeeVaccinationId") UUID employeeVaccinationId,
                             @Valid @RequestBody EmployeeVaccination employeeVaccination) {
-        EmployeeVaccination employeeVaccination2 = employeeVaccinationService.updateEmployeeVaccination(employeeId, employeeVaccinationId, employeeVaccination);
-        System.out.println(employeeVaccination2);
-        return null;
+        return employeeVaccinationService.updateEmployeeVaccination(employeeId, employeeVaccinationId, employeeVaccination);
     }
 
     @DeleteMapping("/employees/{employeeId}/employee-vaccinations/{employeeVaccinationId}")

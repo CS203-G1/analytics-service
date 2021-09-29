@@ -16,14 +16,12 @@ Content-Type: application/json
 ###
 # Update employee vaccination
 # TODO: Check request
-PUT http://localhost:8080/employees/4342b824-423a-4274-883e-009643ed9186
-
+PUT http://localhost:8080/employees/d6d04eb8-83e8-47bb-af10-393b457499f3/employee-vaccinations/da5b5d38-ea35-4754-b9b7-b2cc2bedab8a
 Content-Type: application/json
+
 {
-    "vaccinationStatus": 1,
-    "vaccinationBrand": 1,
-    "healthStatus": 1,
-    "employeeVaccinations": null
+    "vaccinationCount": 1,
+    "vaccinationBrand": 1
 }
 
 ###

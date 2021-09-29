@@ -14,6 +14,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import csd.analytics.enumerator.HealthStatus;
 import csd.analytics.enumerator.VaccinationBrand;
 import csd.analytics.enumerator.VaccinationStatus;
@@ -38,6 +40,7 @@ public class Employee {
     private UUID id;
 
     @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<EmployeeVaccination> employeeVaccinations;
 
     @NotNull(message = "VaccinationStatus must not be null")

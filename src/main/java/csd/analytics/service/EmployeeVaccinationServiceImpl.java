@@ -49,7 +49,6 @@ public class EmployeeVaccinationServiceImpl implements EmployeeVaccinationServic
     @Override
     public EmployeeVaccination updateEmployeeVaccination(UUID employeeId, UUID employeeVaccinationId, EmployeeVaccination employeeVaccination) {
         return employeeVaccinationRepository.findByIdAndEmployeeId(employeeVaccinationId, employeeId).map(oldEmployeeVaccination -> {
-            oldEmployeeVaccination.setId(employeeVaccination.getId());
             oldEmployeeVaccination.setVaccinationBrand(employeeVaccination.getVaccinationBrand());
             oldEmployeeVaccination.setVaccinationCount(employeeVaccination.getVaccinationCount());
             oldEmployeeVaccination.setCreatedAt(employeeVaccination.getCreatedAt());

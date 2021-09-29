@@ -10,6 +10,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import csd.analytics.enumerator.VaccinationBrand;
 
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -35,8 +38,9 @@ public class EmployeeVaccination {
     @JoinColumn(name = "employee_id")
     private Employee employee;
 
+    @Enumerated(EnumType.ORDINAL)
     @Column(name = "vaccination_brand")
-    private short vaccinationBrand;
+    private VaccinationBrand vaccinationBrand;
 
     @Column(name = "vaccination_count")
     private short vaccinationCount;

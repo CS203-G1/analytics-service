@@ -43,7 +43,7 @@ public class EmployeeVaccination {
 
     @ManyToOne
     @JoinColumn(name = "employee_id")
-    @ToString.Exclude
+    @JsonIgnore
     private Employee employee;
 
     @NotNull(message = "VaccinationBrand must not be null")

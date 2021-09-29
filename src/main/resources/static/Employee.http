@@ -2,6 +2,10 @@
 GET http://localhost:8080/employees
 
 ###
+# Get a specific employee
+GET http://localhost:8080/employees/d6d04eb8-83e8-47bb-af10-393b457499f3
+
+###
 # Add an employee
 POST http://localhost:8080/employees
 Content-Type: application/json

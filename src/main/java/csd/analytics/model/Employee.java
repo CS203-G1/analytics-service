@@ -40,7 +40,6 @@ public class Employee {
     private UUID id;
 
     @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
-    @JsonIgnore
     private List<EmployeeVaccination> employeeVaccinations;
 
     @NotNull(message = "VaccinationStatus must not be null")

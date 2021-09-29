@@ -3,6 +3,8 @@ package csd.analytics.controller;
 import java.util.List;
 import java.util.UUID;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,14 +39,14 @@ public class EmployeeVaccinationController {
 
     @PostMapping("/employees/{employeeId}/employee-vaccinations")
     public EmployeeVaccination addEmployeeVaccination(@PathVariable(value = "employeeId") UUID employeeId,
-                            @RequestBody EmployeeVaccination employeeVaccination) {
+                            @Valid @RequestBody EmployeeVaccination employeeVaccination) {
         return employeeVaccinationService.addEmployeeVaccination(employeeId, employeeVaccination);
     }
 
     @PutMapping("/employees/{employeeId}/employee-vaccinations/{employeeVaccinationId}")
     public EmployeeVaccination updateEmployeeVaccination(@PathVariable(value = "employeeId") UUID employeeId,
                             @PathVariable(value = "employeeVaccinationId") UUID employeeVaccinationId,
-                            @RequestBody EmployeeVaccination employeeVaccination) {
+                            @Valid @RequestBody EmployeeVaccination employeeVaccination) {
         return employeeVaccinationService.updateEmployeeVaccination(employeeId, employeeVaccinationId, employeeVaccination);
     }
 

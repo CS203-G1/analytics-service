@@ -1,0 +1,35 @@
+# Get all employees
+GET http://localhost:8080/employees
+
+###
+# Get a specific employee
+GET http://localhost:8080/employees/d6d04eb8-83e8-47bb-af10-393b457499f3
+
+###
+# Add an employee
+POST http://localhost:8080/employees
+Content-Type: application/json
+
+{
+    "vaccinationStatus": "SECOND_DOSE",
+    "vaccinationBrand": "CORONA_VAC",
+    "healthStatus": "ILL",
+    "employeeVaccinations": null
+}
+
+###
+# Update an employee
+PUT http://localhost:8080/employees/d7d09f3e-2513-4e08-bb17-dae9f872d84d
+Content-Type: application/json
+
+{
+    "vaccinationStatus": "FIRST_DOSE",
+    "vaccinationBrand": "MODERNA",
+    "healthStatus": "ILL",
+    "employeeVaccinations": null
+}
+
+###
+# Delete an employee
+DELETE http://localhost:8080/employees/a9c843ff-af3e-4e2f-b64a-d119bf0980da
+Content-Type: application/json

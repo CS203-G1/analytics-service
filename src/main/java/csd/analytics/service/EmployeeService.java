@@ -9,4 +9,5 @@ public interface EmployeeService {
     List<Employee> getAllEmployeesByDepartmentId(UUID departmentId);
     Employee getEmployeeByDepartmentId(UUID departmentId, UUID employeeId);
     Employee updateEmployeeByDepartmentId(UUID departmentId, UUID employeeId, Employee employee);
+    Employee getEmployeeById(UUID employeeId);
 }

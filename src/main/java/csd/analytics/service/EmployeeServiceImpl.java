@@ -19,12 +19,18 @@ public class EmployeeServiceImpl implements EmployeeService {
         this.employeeRepository = employeeRepository;
     }
 
+    // Method is created for EmployeeVaccination service
+    @Override
+    public Employee getEmployeeById(UUID employeeId) {
+        return employeeRepository.findById(employeeId).orElseThrow(() -> new EmployeeNotFoundException(employeeId));
+    }
+
     @Override
     public List<Employee> getAllEmployeesByDepartmentId(UUID departmentId) {
         List<Employee> employees = employeeRepository.findByDepartmentId(departmentId);
 
         if (employees.isEmpty()) {
-            throw new EmployeeNotFoundException(departmentId);
+            throw new EmployeeNotFoundException(departmentId.toString());
         }
         return employees;
     }

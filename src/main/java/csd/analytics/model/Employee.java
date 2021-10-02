@@ -11,7 +11,9 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -41,6 +43,14 @@ public class Employee {
 
     @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
     private List<EmployeeVaccination> employeeVaccinations;
+
+    @OneToOne
+    @JsonIgnore
+    @JoinColumn(name = "department_id")
+    private Department department;
+
+    @Column(name = "name")
+    private String name;
 
     @NotNull(message = "VaccinationStatus must not be null")
     @Enumerated(EnumType.ORDINAL)

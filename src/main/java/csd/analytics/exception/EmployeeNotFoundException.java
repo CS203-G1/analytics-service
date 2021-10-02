@@ -19,6 +19,6 @@ public class EmployeeNotFoundException extends ResourceNotFoundException {
     }
 
     public EmployeeNotFoundException(UUID employeeId) {
-        super(String.format("Unable to find", employeeId));
+        super(String.format("Unable to find employee %s", employeeId));
     }
 }

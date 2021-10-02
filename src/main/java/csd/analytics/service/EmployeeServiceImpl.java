@@ -20,35 +20,28 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public Employee addEmployee(Employee employee) {
-        return employeeRepository.save(employee);
+    public List<Employee> getAllEmployeesByDepartmentId(UUID departmentId) {
+        List<Employee> employees = employeeRepository.findByDepartmentId(departmentId);
+
+        if (employees.isEmpty()) {
+            throw new EmployeeNotFoundException(departmentId);
+        }
+        return employees;
     }
 
     @Override
-    public List<Employee> getAllEmployees() {
-        return employeeRepository.findAll();
+    public Employee getEmployeeByDepartmentId(UUID departmentId, UUID employeeId) {
+        return employeeRepository.findByIdAndDepartmentId(departmentId, employeeId)
+                .orElseThrow(() -> new EmployeeNotFoundException(departmentId, employeeId));
     }
 
     @Override
-    public Employee getEmployeeById(UUID employeeId) {
-        return employeeRepository.findById(employeeId).orElseThrow(() -> new EmployeeNotFoundException(employeeId));
-    }
+    public Employee updateEmployeeByDepartmentId(UUID departmentId, UUID employeeId, Employee employee) {
+        Employee oldEmployee = getEmployeeByDepartmentId(departmentId, employeeId);
+        oldEmployee.setVaccinationStatus(employee.getVaccinationStatus());
+        oldEmployee.setVaccinationBrand(employee.getVaccinationBrand());
+        oldEmployee.setHealthStatus(employee.getHealthStatus());
 
-    @Override
-    public Employee updateEmployeeById(UUID employeeId, Employee employee) {
-        return employeeRepository.findById(employeeId).map(oldEmployee -> {
-            oldEmployee.setVaccinationStatus(employee.getVaccinationStatus());
-            oldEmployee.setVaccinationBrand(employee.getVaccinationBrand());
-            oldEmployee.setHealthStatus(employee.getHealthStatus());
-
-            return employeeRepository.save(oldEmployee);
-        }).orElseThrow(() -> new EmployeeNotFoundException(employeeId));
-    }
-
-    @Override
-    public void deleteEmployeeById(UUID employeeId) {
-        Employee employee = getEmployeeById(employeeId);
-        
-        employeeRepository.delete(employee);
+        return employeeRepository.save(oldEmployee);
     }
 }

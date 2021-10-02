@@ -1,4 +1,4 @@
-package csd.roster.model;
+package csd.analytics.model;
 
 import java.util.List;
 import java.util.UUID;

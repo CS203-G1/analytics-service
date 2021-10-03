@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import csd.analytics.exception.EmployeeVaccinationNotFoundException;
 import csd.analytics.model.EmployeeVaccination;
-import csd.analytics.model.Employee;
 import csd.analytics.repository.EmployeeVaccinationRepository;
 
 @Service
@@ -20,14 +19,6 @@ public class EmployeeVaccinationServiceImpl implements EmployeeVaccinationServic
     public EmployeeVaccinationServiceImpl(EmployeeVaccinationRepository employeeVaccinationRepository, EmployeeService employeeService) {
         this.employeeVaccinationRepository = employeeVaccinationRepository;
         this.employeeService = employeeService;
-    }
-
-    @Override
-    public EmployeeVaccination addEmployeeVaccination(UUID employeeId, EmployeeVaccination employeeVaccination) {
-        Employee employee = employeeService.getEmployeeById(employeeId);
-        employeeVaccination.setEmployee(employee);
-
-        return employeeVaccinationRepository.save(employeeVaccination);
     }
 
     @Override
@@ -44,24 +35,5 @@ public class EmployeeVaccinationServiceImpl implements EmployeeVaccinationServic
     public EmployeeVaccination getEmployeeVaccination(UUID employeeId, UUID employeeVaccinationId) {
         return employeeVaccinationRepository.findByIdAndEmployeeId(employeeVaccinationId, employeeId)
                 .orElseThrow(() -> new EmployeeVaccinationNotFoundException(employeeVaccinationId, employeeId));
-    }
-
-    @Override
-    public EmployeeVaccination updateEmployeeVaccination(UUID employeeId, UUID employeeVaccinationId, EmployeeVaccination employeeVaccination) {
-        return employeeVaccinationRepository.findByIdAndEmployeeId(employeeVaccinationId, employeeId).map(oldEmployeeVaccination -> {
-            oldEmployeeVaccination.setVaccinationBrand(employeeVaccination.getVaccinationBrand());
-            oldEmployeeVaccination.setVaccinationCount(employeeVaccination.getVaccinationCount());
-            oldEmployeeVaccination.setCreatedAt(employeeVaccination.getCreatedAt());
-
-            return employeeVaccinationRepository.save(oldEmployeeVaccination);
-
-        }).orElseThrow(() -> new EmployeeVaccinationNotFoundException(employeeVaccinationId, employeeId));
-    }
-
-    @Override
-    public void deleteEmployeeVaccination(UUID employeeId, UUID employeeVaccinationId) {
-        EmployeeVaccination employeeVaccination = getEmployeeVaccination(employeeId, employeeVaccinationId);
-
-        employeeVaccinationRepository.delete(employeeVaccination);
     }
 }

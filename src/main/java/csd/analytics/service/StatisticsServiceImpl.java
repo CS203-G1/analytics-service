@@ -1,6 +1,7 @@
 package csd.analytics.service;
 
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,8 +22,14 @@ public class StatisticsServiceImpl implements StatisticsService {
     }
 
     @Override
-    public void insertSnapshot() {
+    public void insertSnapshot(UUID companyId) {
+        /**
+         * Find all employees in the company
+         * Insert the following data into the logs:
+         *      1. Health status
+         */
 
+        
     }
 
     //TODO - Add in companyId
@@ -51,7 +58,7 @@ public class StatisticsServiceImpl implements StatisticsService {
 
     @Override
     public double employeeSickRate() {
-        // List<Employee> employees = employeeService.getEmployeesByTwoWeeks();
+        
         return 0;
     }
 }

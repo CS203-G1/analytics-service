@@ -28,5 +28,12 @@ public class Statistics {
     @Column(name = "id")
     private UUID id;
 
-    
+    @Column(name = "num_of_sick")
+    private Integer numOfSick;
+
+    @Column(name = "num_of_healthy")
+    private Integer numOfHealthy;
+
+    @Column(name = "num_of_covid")
+    private Integer numOfCovid;
 }

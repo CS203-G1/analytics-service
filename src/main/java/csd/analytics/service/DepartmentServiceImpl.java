@@ -2,6 +2,7 @@ package csd.analytics.service;
 
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,7 +20,12 @@ public class DepartmentServiceImpl implements DepartmentService {
     }
 
     @Override
-    public List<Department> getDepartmentsByCompanyId(UUID companyId) {
-        return departmentRepository.findByCompanyId(companyId);
+    public List<UUID> getDepartmentIdsByCompanyId(UUID companyId) {
+        List<Department> departments = departmentRepository.findByCompanyId(companyId);
+        List<UUID> departmentIds = departments
+                .stream()
+                .map(department -> department.getId())
+                .collect(Collectors.toList());
+        return departmentIds;
     }
 }

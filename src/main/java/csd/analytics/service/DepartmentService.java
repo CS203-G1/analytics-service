@@ -6,5 +6,5 @@ import java.util.UUID;
 import csd.analytics.model.Department;
 
 public interface DepartmentService {
-    List<Department> getDepartmentsByCompanyId(UUID companyId);
+    List<UUID> getDepartmentIdsByCompanyId(UUID companyId);
 }

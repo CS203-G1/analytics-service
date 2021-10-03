@@ -4,6 +4,6 @@ import java.util.UUID;
 
 public interface StatisticsService {
     void insertSnapshot(UUID companyId);
-    double employeeTurnoverRate();
+    double employeeTurnoverRate(UUID companyId);
     double employeeSickRate();
 }

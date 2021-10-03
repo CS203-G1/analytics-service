@@ -3,7 +3,7 @@ GET http://localhost:8080/employees
 
 ###
 # Get a specific employee
-GET http://localhost:8080/employees/c598568a-f66e-4d23-99e5-97b54b412107
+GET http://localhost:8080/departments/d6d04eb8-83e8-47bb-af10-393b457499f3/employees/d6d04eb8-83e8-47bb-af10-393b457499f3
 
 ###
 # Add an employee

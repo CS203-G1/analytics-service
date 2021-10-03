@@ -75,4 +75,7 @@ public class Employee {
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "created_at")
     private Date createdAt;
+
+    @Column(name = "is_in_company")
+    private Boolean isInCompany;
 }

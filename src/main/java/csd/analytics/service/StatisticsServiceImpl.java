@@ -9,18 +9,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import csd.analytics.model.Employee;
-import csd.analytics.repository.EmployeeRepository;
 import csd.analytics.repository.StatisticsRepository;
 
 @Service
 public class StatisticsServiceImpl implements StatisticsService {
     private StatisticsRepository statisticsRepository;
-    private EmployeeRepository employeeRepository;
+    private EmployeeService employeeService;
 
     @Autowired
-    public StatisticsServiceImpl(StatisticsRepository statisticsRepository, EmployeeRepository employeeRepository) {
+    public StatisticsServiceImpl(StatisticsRepository statisticsRepository, EmployeeService employeeService) {
         this.statisticsRepository = statisticsRepository;
-        this.employeeRepository = employeeRepository;
+        this.employeeService = employeeService;
     }
 
     @Override
@@ -42,7 +41,7 @@ public class StatisticsServiceImpl implements StatisticsService {
         calendar.set(Calendar.DAY_OF_MONTH, 1); // Set day of start date to 1
         Date start = calendar.getTime();
 
-        List<Employee> employees = employeeRepository.findByCreatedAtBetween(start, end);
+        List<Employee> employees = employeeService.getEmployeesByCurrentMonth(start, end);
         List<Employee> employeesLeft = employees
                 .stream()
                 .filter(employee -> !employee.getIsInCompany())

@@ -1,5 +1,6 @@
 package csd.analytics.service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -39,5 +40,10 @@ public class EmployeeServiceImpl implements EmployeeService {
     public Employee getEmployeeByDepartmentId(UUID departmentId, UUID employeeId) {
         return employeeRepository.findByIdAndDepartmentId(departmentId, employeeId)
                 .orElseThrow(() -> new EmployeeNotFoundException(departmentId, employeeId));
+    }
+
+    @Override
+    public List<Employee> getEmployeesByCurrentMonth(Date start, Date end) {
+        return employeeRepository.findByCreatedAtBetween(start, end);
     }
 }

@@ -1,5 +1,6 @@
 package csd.analytics.service;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -43,7 +44,22 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public List<Employee> getEmployeesByCurrentMonth(Date start, Date end) {
+    public List<Employee> getEmployeesByCurrentMonth() {
+        Calendar calendar = Calendar.getInstance();
+        Date end = calendar.getTime();
+
+        calendar.set(Calendar.DAY_OF_MONTH, 1); // Set day of start date to 1
+        Date start = calendar.getTime();
+        return employeeRepository.findByCreatedAtBetween(start, end);
+    }
+
+    @Override
+    public List<Employee> getEmployeesByTwoWeeks() {
+        Calendar calendar = Calendar.getInstance();
+        Date end = calendar.getTime();
+
+        calendar.set(Calendar.DATE, -14); // Set day of start date to 1
+        Date start = calendar.getTime();
         return employeeRepository.findByCreatedAtBetween(start, end);
     }
 }

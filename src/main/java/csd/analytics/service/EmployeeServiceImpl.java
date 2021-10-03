@@ -40,14 +40,4 @@ public class EmployeeServiceImpl implements EmployeeService {
         return employeeRepository.findByIdAndDepartmentId(departmentId, employeeId)
                 .orElseThrow(() -> new EmployeeNotFoundException(departmentId, employeeId));
     }
-
-    @Override
-    public Employee updateEmployeeByDepartmentId(UUID departmentId, UUID employeeId, Employee employee) {
-        Employee oldEmployee = getEmployeeByDepartmentId(departmentId, employeeId);
-        oldEmployee.setVaccinationStatus(employee.getVaccinationStatus());
-        oldEmployee.setVaccinationBrand(employee.getVaccinationBrand());
-        oldEmployee.setHealthStatus(employee.getHealthStatus());
-
-        return employeeRepository.save(oldEmployee);
-    }
 }

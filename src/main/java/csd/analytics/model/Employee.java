@@ -1,5 +1,6 @@
 package csd.analytics.model;
 
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -14,9 +15,13 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import org.hibernate.annotations.CreationTimestamp;
 
 import csd.analytics.enumerator.HealthStatus;
 import csd.analytics.enumerator.VaccinationBrand;
@@ -65,4 +70,9 @@ public class Employee {
     @Enumerated(EnumType.ORDINAL)
     @Column(name = "health_status")
     private HealthStatus healthStatus;
+
+    @CreationTimestamp
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "created_at")
+    private Date createdAt;
 }

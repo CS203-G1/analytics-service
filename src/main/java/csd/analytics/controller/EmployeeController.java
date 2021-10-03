@@ -24,18 +24,18 @@ public class EmployeeController {
         this.employeeService = employeeService;
     }
 
-    @GetMapping("/departmentId/{departmentId}/employees/{employeeId}")
+    @GetMapping("/departments/{departmentId}/employees/{employeeId}")
     public Employee getEmployeeById(@PathVariable(value = "departmentId") UUID departmentId,
             @PathVariable(value = "employeeId") UUID employeeId) {
         return employeeService.getEmployeeByDepartmentId(departmentId, employeeId);
     }
 
-    @GetMapping("/departmentId/{departmentId}/employees")
+    @GetMapping("/departments/{departmentId}/employees")
     public List<Employee> getAllEmployees(@PathVariable(value = "departmentId") UUID departmentId) {
         return employeeService.getAllEmployeesByDepartmentId(departmentId);
     }
 
-    @PutMapping("/departmentId/{departmentId}/employees/{employeeId}")
+    @PutMapping("/departments/{departmentId}/employees/{employeeId}")
     public Employee updateEmployee(@PathVariable(value = "departmentId") UUID departmentId,
                                     @PathVariable(value = "employeeId") UUID employeeId, 
                                     @Valid @RequestBody Employee employee) {

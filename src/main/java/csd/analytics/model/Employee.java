@@ -77,5 +77,5 @@ public class Employee {
     private Date createdAt;
 
     @Column(name = "is_in_company")
-    private Boolean isInCompany;
+    private Boolean isInCompany = true;
 }

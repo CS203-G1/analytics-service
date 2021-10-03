@@ -1,5 +1,7 @@
 package csd.analytics.repository;
 
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -13,4 +15,5 @@ import csd.analytics.model.Employee;
 public interface EmployeeRepository extends JpaRepository<Employee, UUID> {
     List<Employee> findByDepartmentId(UUID departmentId);
     Optional<Employee> findByIdAndDepartmentId(UUID employeeId, UUID departmentId);
+    List<Employee> findByCreatedAtBetween(Date start, Date end);
 }

@@ -38,28 +38,35 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
+    public List<Employee> getAllEmployeesByDepartmentIds(List<UUID> departmentIds) {
+        List<Employee> employees = employeeRepository.findByDepartmentIdIn(departmentIds);
+
+        return employees;
+    }
+
+    @Override
     public Employee getEmployeeByDepartmentId(UUID departmentId, UUID employeeId) {
         return employeeRepository.findByIdAndDepartmentId(departmentId, employeeId)
                 .orElseThrow(() -> new EmployeeNotFoundException(departmentId, employeeId));
     }
 
     @Override
-    public List<Employee> getEmployeesByCurrentMonth() {
+    public List<Employee> getEmployeesByCurrentMonth(List<UUID> departmentIds) {
         Calendar calendar = Calendar.getInstance();
         Date end = calendar.getTime();
 
         calendar.set(Calendar.DAY_OF_MONTH, 1); // Set day of start date to 1
         Date start = calendar.getTime();
-        return employeeRepository.findByCreatedAtBetween(start, end);
+        return employeeRepository.findByCreatedAtBetweenAndDepartmentIdIn(start, end, departmentIds);
     }
 
     @Override
-    public List<Employee> getEmployeesByTwoWeeks() {
+    public List<Employee> getEmployeesByTwoWeeks(List<UUID> departmentIds) {
         Calendar calendar = Calendar.getInstance();
         Date end = calendar.getTime();
 
         calendar.set(Calendar.DATE, -14); // Set day of start date to 1
         Date start = calendar.getTime();
-        return employeeRepository.findByCreatedAtBetween(start, end);
+        return employeeRepository.findByCreatedAtBetweenAndDepartmentIdIn(start, end, departmentIds);
     }
 }

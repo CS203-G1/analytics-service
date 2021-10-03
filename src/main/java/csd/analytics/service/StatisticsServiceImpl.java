@@ -31,7 +31,7 @@ public class StatisticsServiceImpl implements StatisticsService {
          * Insert the following data into the logs:
          *      1. Health status
          */
-        List<Department> departments = departmentService.getDepartmentsByCompanyId(companyId);
+        // List<UUID> departments = departmentService.getDepartmentIdsByCompanyId(companyId);
 
     }
 
@@ -44,9 +44,9 @@ public class StatisticsServiceImpl implements StatisticsService {
          * 3. Compute turnover rate per month for the company
          */
 
-        List<Department> departments = departmentService.getDepartmentsByCompanyId(companyId);
+        List<UUID> departmentIds = departmentService.getDepartmentIdsByCompanyId(companyId);
 
-        List<Employee> employees = employeeService.getEmployeesByCurrentMonth();
+        List<Employee> employees = employeeService.getEmployeesByCurrentMonth(departmentIds);
         List<Employee> employeesLeft = employees
                 .stream()
                 .filter(employee -> !employee.getIsInCompany())

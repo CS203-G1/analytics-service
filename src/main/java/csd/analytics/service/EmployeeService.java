@@ -7,8 +7,9 @@ import csd.analytics.model.Employee;
 
 public interface EmployeeService {
     List<Employee> getAllEmployeesByDepartmentId(UUID departmentId);
+    List<Employee> getAllEmployeesByDepartmentIds(List<UUID> departmentIds);
     Employee getEmployeeByDepartmentId(UUID departmentId, UUID employeeId);
     Employee getEmployeeById(UUID employeeId);
-    List<Employee> getEmployeesByCurrentMonth();
-    List<Employee> getEmployeesByTwoWeeks();
+    List<Employee> getEmployeesByCurrentMonth(List<UUID> departmentIds);
+    List<Employee> getEmployeesByTwoWeeks(List<UUID> departmentIds);
 }

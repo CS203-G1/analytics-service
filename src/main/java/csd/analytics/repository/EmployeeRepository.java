@@ -14,5 +14,6 @@ import csd.analytics.model.Employee;
 public interface EmployeeRepository extends JpaRepository<Employee, UUID> {
     List<Employee> findByDepartmentId(UUID departmentId);
     Optional<Employee> findByIdAndDepartmentId(UUID employeeId, UUID departmentId);
-    List<Employee> findByCreatedAtBetween(Date start, Date end);
+    List<Employee> findByCreatedAtBetweenAndDepartmentIdIn(Date start, Date end, List<UUID> departmentIds);
+    List<Employee> findByDepartmentIdIn(List<UUID> departmentIds);
 }

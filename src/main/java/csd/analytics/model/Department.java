@@ -13,6 +13,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import org.hibernate.annotations.CreationTimestamp;
 
 import lombok.AllArgsConstructor;
@@ -35,6 +37,7 @@ public class Department {
     @Column(name="id")
     private UUID id;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name="company_id")
     private Company company;

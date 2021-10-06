@@ -13,8 +13,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
@@ -49,9 +50,12 @@ public class Employee {
     @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
     private List<EmployeeVaccination> employeeVaccinations;
 
-    @OneToOne
+    @ManyToOne
     @JsonIgnore
-    @JoinColumn(name = "department_id")
+    @JoinColumns({
+            @JoinColumn(name="company_id", referencedColumnName="company_id"),
+            @JoinColumn(name="department_id", referencedColumnName="id")
+    })
     private Department department;
 
     @Column(name = "name")

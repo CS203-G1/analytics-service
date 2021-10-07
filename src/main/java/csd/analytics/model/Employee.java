@@ -45,7 +45,7 @@ public class Employee {
     @Column(name = "id")
     private UUID id;
 
-    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "employee", orphanRemoval = true, cascade = CascadeType.ALL)
     private List<EmployeeVaccination> employeeVaccinations;
 
     @ManyToOne

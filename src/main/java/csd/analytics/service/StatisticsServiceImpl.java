@@ -32,8 +32,7 @@ public class StatisticsServiceImpl implements StatisticsService {
          * Insert the following data into the logs:
          *      1. Health status
          */
-        List<UUID> departmentIds = departmentService.getDepartmentIdsByCompanyId(companyId);
-        List<Employee> employees = employeeService.getAllEmployeesByDepartmentIds(departmentIds);
+        List<Employee> employees = employeeService.getAllEmployeesByCompanyId(companyId);
 
         int numOfSick = 0;
         int numOfHealthy = 0;
@@ -53,7 +52,6 @@ public class StatisticsServiceImpl implements StatisticsService {
         statisticsRepository.save(statistic);
     }
 
-    //TODO - Add in companyId
     @Override
     public double employeeTurnoverRate(UUID companyId) {
         /**
@@ -62,9 +60,10 @@ public class StatisticsServiceImpl implements StatisticsService {
          * 3. Compute turnover rate per month for the company
          */
 
-        List<UUID> departmentIds = departmentService.getDepartmentIdsByCompanyId(companyId);
+        List<Employee> employees = employeeService.getAllEmployeesByCompanyId(companyId);
+        System.out.println(employees);
 
-        List<Employee> employees = employeeService.getEmployeesByCurrentMonth(departmentIds);
+        // List<Employee> employees = employeeService.getEmployeesByCurrentMonth(departmentIds);
         List<Employee> employeesLeft = employees
                 .stream()
                 .filter(employee -> !employee.getIsInCompany())

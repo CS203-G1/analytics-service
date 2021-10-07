@@ -39,9 +39,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public List<Employee> getAllEmployeesByDepartmentIds(List<UUID> departmentIds) {
-        List<Employee> employees = employeeRepository.findByDepartmentIdIn(departmentIds);
-
-        return employees;
+        return employeeRepository.findByDepartmentIdIn(departmentIds);
     }
 
     @Override
@@ -68,5 +66,10 @@ public class EmployeeServiceImpl implements EmployeeService {
         calendar.set(Calendar.DATE, -14); // Set day of start date to 1
         Date start = calendar.getTime();
         return employeeRepository.findByCreatedAtBetweenAndDepartmentIdIn(start, end, departmentIds);
+    }
+
+    @Override
+    public List<Employee> getAllEmployeesByCompanyId(UUID companyId) {
+        return employeeRepository.findAllByCompanyId(companyId);
     }
 }

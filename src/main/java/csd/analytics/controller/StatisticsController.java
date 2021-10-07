@@ -18,9 +18,8 @@ public class StatisticsController {
         this.statisticsService = statisticsService;
     }
 
-    //TODO - add in companyId into path variable
     @GetMapping("/statistics/{companyId}/turnover")
-    public double getEmployeeTurnoverRate(@PathVariable(name = "companyID") UUID companyId) {
+    public double getEmployeeTurnoverRate(@PathVariable(name = "companyId") UUID companyId) {
         return statisticsService.employeeTurnoverRate(companyId);
     }
 }

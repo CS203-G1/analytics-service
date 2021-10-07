@@ -10,5 +10,5 @@ import csd.analytics.model.Company;
 
 @Repository
 public interface CompanyRepository extends JpaRepository<Company, UUID> {
-    List<UUID> getAllCompanyIds();
+    List<Company> findAll();
 }

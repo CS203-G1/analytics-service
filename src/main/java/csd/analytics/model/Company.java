@@ -37,6 +37,9 @@ public class Company {
     @OneToMany(mappedBy = "company", cascade = CascadeType.ALL)
     private List<Department> departments;
 
+    @OneToMany(mappedBy = "company", cascade = CascadeType.ALL)
+    private List<Statistic> statistics;
+
     @Column(name = "name")
     private String name;
 

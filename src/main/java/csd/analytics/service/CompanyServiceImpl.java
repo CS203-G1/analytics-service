@@ -20,6 +20,11 @@ public class CompanyServiceImpl implements CompanyService {
     }
 
     @Override
+    public List<Company> getAllCompany() {
+        return companyRepository.findAll();
+    }
+
+    @Override
     public List<UUID> getAllCompanyIds() {
         List<Company> companies = companyRepository.findAll();
         List<UUID> companyIds = companies

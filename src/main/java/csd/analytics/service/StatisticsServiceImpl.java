@@ -7,9 +7,7 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import csd.analytics.enumerator.HealthStatus;
 import csd.analytics.model.Employee;
-import csd.analytics.model.Statistics;
 import csd.analytics.repository.StatisticsRepository;
 
 @Service
@@ -24,35 +22,6 @@ public class StatisticsServiceImpl implements StatisticsService {
         this.statisticsRepository = statisticsRepository;
         this.employeeService = employeeService;
         this.departmentService = departmentService;
-    }
-
-    @Override
-    public void insertSnapshot(UUID companyId) {
-        /**
-         * Find all employees in the company Insert the following data into the logs: 1.
-         * Health status
-         */
-        List<Employee> employees = employeeService.getAllEmployeesByCompanyId(companyId);
-
-        int numOfSick = 0;
-        int numOfHealthy = 0;
-        int numOfCovid = 0;
-
-        for (Employee employee : employees) {
-            if (employee.getHealthStatus().equals(HealthStatus.COVID))
-                numOfCovid++;
-            if (employee.getHealthStatus().equals(HealthStatus.HEALTHY))
-                numOfHealthy++;
-            if (employee.getHealthStatus().equals(HealthStatus.ILL))
-                numOfSick++;
-        }
-
-        Statistics statistic = new Statistics();
-        statistic.setNumOfSick(numOfSick);
-        statistic.setNumOfHealthy(numOfHealthy);
-        statistic.setNumOfCovid(numOfCovid);
-
-        statisticsRepository.save(statistic);
     }
 
     @Override

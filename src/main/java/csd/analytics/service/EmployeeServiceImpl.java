@@ -1,5 +1,6 @@
 package csd.analytics.service;
 
+import java.time.LocalDateTime;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -49,23 +50,19 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public List<Employee> getEmployeesByCurrentMonth(List<UUID> departmentIds) {
-        Calendar calendar = Calendar.getInstance();
-        Date end = calendar.getTime();
+    public List<Employee> getEmployeesByCurrentMonth(UUID companyId) {
+        LocalDateTime end = LocalDateTime.now();
+        LocalDateTime start = end.withDayOfMonth(1);
 
-        calendar.set(Calendar.DAY_OF_MONTH, 1); // Set day of start date to 1
-        Date start = calendar.getTime();
-        return employeeRepository.findByCreatedAtBetweenAndDepartmentIdIn(start, end, departmentIds);
+        return employeeRepository.findByCompanyIdAndCreatedAtBetween(companyId, start, end);
     }
 
     @Override
-    public List<Employee> getEmployeesByTwoWeeks(List<UUID> departmentIds) {
-        Calendar calendar = Calendar.getInstance();
-        Date end = calendar.getTime();
+    public List<Employee> getEmployeesByTwoWeeks(UUID companyId) {
+        LocalDateTime end = LocalDateTime.now();
+        LocalDateTime start = end.minusDays(14);
 
-        calendar.set(Calendar.DATE, -14); // Set day of start date to 1
-        Date start = calendar.getTime();
-        return employeeRepository.findByCreatedAtBetweenAndDepartmentIdIn(start, end, departmentIds);
+        return employeeRepository.findByCompanyIdAndCreatedAtBetween(companyId, start, end);
     }
 
     @Override

@@ -50,6 +50,7 @@ public class Employee {
 
     @ManyToOne
     @JsonIgnore
+    @ToString.Exclude
     @JoinColumns({
             @JoinColumn(name="company_id", referencedColumnName="company_id"),
             @JoinColumn(name="department_id", referencedColumnName="id")

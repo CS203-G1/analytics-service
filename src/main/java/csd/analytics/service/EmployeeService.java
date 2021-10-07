@@ -11,6 +11,6 @@ public interface EmployeeService {
     List<Employee> getAllEmployeesByCompanyId(UUID companyId);
     Employee getEmployeeByDepartmentId(UUID departmentId, UUID employeeId);
     Employee getEmployeeById(UUID employeeId);
-    List<Employee> getEmployeesByCurrentMonth(List<UUID> departmentIds);
-    List<Employee> getEmployeesByTwoWeeks(List<UUID> departmentIds);
+    List<Employee> getEmployeesByCurrentMonth(UUID companyId);
+    List<Employee> getEmployeesByTwoWeeks(UUID companyId);
 }

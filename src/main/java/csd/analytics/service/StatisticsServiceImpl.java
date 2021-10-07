@@ -19,7 +19,8 @@ public class StatisticsServiceImpl implements StatisticsService {
     private DepartmentService departmentService;
 
     @Autowired
-    public StatisticsServiceImpl(StatisticsRepository statisticsRepository, EmployeeService employeeService, DepartmentService departmentService) {
+    public StatisticsServiceImpl(StatisticsRepository statisticsRepository, EmployeeService employeeService,
+            DepartmentService departmentService) {
         this.statisticsRepository = statisticsRepository;
         this.employeeService = employeeService;
         this.departmentService = departmentService;
@@ -28,9 +29,8 @@ public class StatisticsServiceImpl implements StatisticsService {
     @Override
     public void insertSnapshot(UUID companyId) {
         /**
-         * Find all employees in the company
-         * Insert the following data into the logs:
-         *      1. Health status
+         * Find all employees in the company Insert the following data into the logs: 1.
+         * Health status
          */
         List<Employee> employees = employeeService.getAllEmployeesByCompanyId(companyId);
 
@@ -38,10 +38,13 @@ public class StatisticsServiceImpl implements StatisticsService {
         int numOfHealthy = 0;
         int numOfCovid = 0;
 
-        for (Employee employee: employees) {
-            if (employee.getHealthStatus().equals(HealthStatus.COVID)) numOfCovid++;
-            if (employee.getHealthStatus().equals(HealthStatus.HEALTHY)) numOfHealthy++;
-            if (employee.getHealthStatus().equals(HealthStatus.ILL)) numOfSick++;
+        for (Employee employee : employees) {
+            if (employee.getHealthStatus().equals(HealthStatus.COVID))
+                numOfCovid++;
+            if (employee.getHealthStatus().equals(HealthStatus.HEALTHY))
+                numOfHealthy++;
+            if (employee.getHealthStatus().equals(HealthStatus.ILL))
+                numOfSick++;
         }
 
         Statistics statistic = new Statistics();
@@ -60,15 +63,11 @@ public class StatisticsServiceImpl implements StatisticsService {
          * 3. Compute turnover rate per month for the company
          */
 
-        List<Employee> employees = employeeService.getAllEmployeesByCompanyId(companyId);
-        System.out.println(employees);
-
-        // List<Employee> employees = employeeService.getEmployeesByCurrentMonth(departmentIds);
-        List<Employee> employeesLeft = employees
-                .stream()
-                .filter(employee -> !employee.getIsInCompany())
-                .collect(Collectors.toList());
         
+        List<Employee> employees = employeeService.getEmployeesByCurrentMonth(companyId);
+        List<Employee> employeesLeft = employees.stream().filter(employee -> !employee.getIsInCompany())
+                .collect(Collectors.toList());
+
         double turnoverRate = 0;
         try {
             turnoverRate = employeesLeft.size() / employees.size();
@@ -80,7 +79,7 @@ public class StatisticsServiceImpl implements StatisticsService {
 
     @Override
     public double employeeSickRate() {
-        
+
         return 0;
     }
 }

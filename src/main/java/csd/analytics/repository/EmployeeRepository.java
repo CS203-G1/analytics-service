@@ -1,5 +1,6 @@
 package csd.analytics.repository;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -15,11 +16,14 @@ import csd.analytics.model.Employee;
 @Repository
 public interface EmployeeRepository extends JpaRepository<Employee, UUID> {
     List<Employee> findByDepartmentId(UUID departmentId);
-    
+
     @Query("select e from Employee e where e.department.company.id = :id")
     List<Employee> findAllByCompanyId(@Param("id") UUID companyId);
 
     Optional<Employee> findByIdAndDepartmentId(UUID employeeId, UUID departmentId);
-    List<Employee> findByCreatedAtBetweenAndDepartmentIdIn(Date start, Date end, List<UUID> departmentIds);
+
+    @Query("select e from Employee e where e.department.company.id = :id and e.createdAt >= :start and e.createdAt <= :end")
+    List<Employee> findByCompanyIdAndCreatedAtBetween(@Param("id") UUID companyId, @Param("start") LocalDateTime start, @Param("end") LocalDateTime end);
+
     List<Employee> findByDepartmentIdIn(List<UUID> departmentIds);
 }

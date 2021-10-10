@@ -42,7 +42,7 @@ public class EmployeeVaccinationServiceTest {
         List<EmployeeVaccination> allEmployeeVaccinationsInEmployee = new ArrayList<EmployeeVaccination>();
         VaccinationStatus vaccinationStatus = VaccinationStatus.NOT_VACCINATED;
         HealthStatus healthStatus = HealthStatus.COVID;
-        Employee employee = new Employee(employeeId, allEmployeeVaccinationsInEmployee, null, "John Doe", vaccinationStatus, null, healthStatus, LocalDateTime.now());
+        Employee employee = new Employee(employeeId, allEmployeeVaccinationsInEmployee, null, "John Doe", vaccinationStatus, null, healthStatus, LocalDateTime.now(), true);
 
         UUID employeeVaccinationId = UUID.randomUUID();
         EmployeeVaccination employeeVaccination = new EmployeeVaccination(employeeVaccinationId, employee, null, 0, LocalDateTime.now());

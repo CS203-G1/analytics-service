@@ -111,4 +111,24 @@ public class EmployeeVaccinationServiceTest {
         assertEquals(expectedExceptionMessage, exception.getMessage());
         verify(employeeVaccinations, times(1)).findByIdAndEmployeeId(employeeVaccinationId, employeeId);
     }
+
+    @Test
+    public void getEmployeeVaccinationWithId_EmployeeVaccinationExists_ReturnFoundEmployeeVaccination() {
+        UUID employeeId = UUID.randomUUID();
+        List<EmployeeVaccination> allEmployeeVaccinationsInEmployee = new ArrayList<EmployeeVaccination>();
+        VaccinationStatus vaccinationStatus = VaccinationStatus.NOT_VACCINATED;
+        HealthStatus healthStatus = HealthStatus.COVID;
+        Employee employee = new Employee(employeeId, allEmployeeVaccinationsInEmployee, null, "John Doe", vaccinationStatus, null, healthStatus, LocalDateTime.now(), true);
+
+        UUID employeeVaccinationId = UUID.randomUUID();
+        EmployeeVaccination employeeVaccination = new EmployeeVaccination(employeeVaccinationId, employee, null, 0, LocalDateTime.now());
+
+        when(employeeVaccinations.findById(employeeVaccinationId)).thenReturn(Optional.of(employeeVaccination));
+
+        EmployeeVaccination foundEmployeeVaccination = employeeVaccinationService.getEmployeeVaccination(employeeVaccinationId);
+
+        assertEquals(employeeVaccination, foundEmployeeVaccination);
+
+        verify(employeeVaccinations, times(1)).findById(employeeVaccinationId);
+    }
 }

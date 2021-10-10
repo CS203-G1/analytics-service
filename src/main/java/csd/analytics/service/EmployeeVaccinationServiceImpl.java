@@ -36,4 +36,10 @@ public class EmployeeVaccinationServiceImpl implements EmployeeVaccinationServic
         return employeeVaccinationRepository.findByIdAndEmployeeId(employeeVaccinationId, employeeId)
                 .orElseThrow(() -> new EmployeeVaccinationNotFoundException(employeeVaccinationId, employeeId));
     }
+
+    @Override
+    public EmployeeVaccination getEmployeeVaccination(UUID employeeVaccinationId) {
+        return employeeVaccinationRepository.findById(employeeVaccinationId)
+                .orElseThrow(() -> new EmployeeVaccinationNotFoundException(employeeVaccinationId));
+    }
 }

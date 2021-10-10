@@ -7,5 +7,8 @@ import csd.analytics.model.EmployeeVaccination;
 
 public interface EmployeeVaccinationService {
     List<EmployeeVaccination> getEmployeeVaccinations(UUID employeeId);
+
     EmployeeVaccination getEmployeeVaccination(UUID employeeId, UUID employeeVaccinationId);
+
+    EmployeeVaccination getEmployeeVaccination(UUID employeeVaccinationId);
 }

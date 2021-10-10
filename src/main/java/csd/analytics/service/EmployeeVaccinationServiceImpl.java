@@ -40,6 +40,6 @@ public class EmployeeVaccinationServiceImpl implements EmployeeVaccinationServic
     @Override
     public EmployeeVaccination getEmployeeVaccination(UUID employeeVaccinationId) {
         return employeeVaccinationRepository.findById(employeeVaccinationId)
-                .orElseThrow(() -> new EmployeeVaccinationNotFoundException(employeeVaccinationId));
+                .orElseThrow(() -> new EmployeeVaccinationNotFoundException(employeeVaccinationId.toString()));
     }
 }

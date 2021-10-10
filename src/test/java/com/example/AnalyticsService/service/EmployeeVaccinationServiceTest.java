@@ -131,4 +131,15 @@ public class EmployeeVaccinationServiceTest {
 
         verify(employeeVaccinations, times(1)).findById(employeeVaccinationId);
     }
+
+    @Test
+    public void getEmployeeVaccinationWithId_EmployeeVaccinationDoesNotExist_ThrowException() {
+        UUID employeeVaccinationId = UUID.randomUUID();
+
+        Exception exception = assertThrows(EmployeeVaccinationNotFoundException.class, () -> employeeVaccinationService.getEmployeeVaccination(employeeVaccinationId));
+        String expectedExceptionMessage = String.format("EmployeeVaccination %s does not exist", employeeVaccinationId);
+
+        assertEquals(expectedExceptionMessage, exception.getMessage());
+        verify(employeeVaccinations, times(1)).findById(employeeVaccinationId);
+    }
 }

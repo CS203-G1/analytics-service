@@ -10,6 +10,7 @@ import static org.mockito.Mockito.when;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 import org.junit.jupiter.api.Test;
@@ -76,5 +77,25 @@ public class EmployeeVaccinationServiceTest {
 
         assertEquals(expectedExceptionMessage, exception.getMessage());
         verify(employeeVaccinations, times(1)).findByEmployeeId(employeeId);
+    }
+
+    @Test
+    public void getEmployeeVaccinationWithIdAndEmployeeId_EmployeeVaccinationExists_ReturnFoundEmployeeVaccination() {
+        UUID employeeId = UUID.randomUUID();
+        List<EmployeeVaccination> allEmployeeVaccinationsInEmployee = new ArrayList<EmployeeVaccination>();
+        VaccinationStatus vaccinationStatus = VaccinationStatus.NOT_VACCINATED;
+        HealthStatus healthStatus = HealthStatus.COVID;
+        Employee employee = new Employee(employeeId, allEmployeeVaccinationsInEmployee, null, "John Doe", vaccinationStatus, null, healthStatus, LocalDateTime.now(), true);
+
+        UUID employeeVaccinationId = UUID.randomUUID();
+        EmployeeVaccination employeeVaccination = new EmployeeVaccination(employeeVaccinationId, employee, null, 0, LocalDateTime.now());
+
+        when(employeeVaccinations.findByIdAndEmployeeId(employeeVaccinationId,employeeId)).thenReturn(Optional.of(employeeVaccination));
+
+        EmployeeVaccination foundEmployeeVaccination = employeeVaccinationService.getEmployeeVaccination(employeeId, employeeVaccinationId);
+
+        assertEquals(employeeVaccination, foundEmployeeVaccination);
+
+        verify(employeeVaccinations, times(1)).findByIdAndEmployeeId(employeeVaccinationId, employeeId);
     }
 }

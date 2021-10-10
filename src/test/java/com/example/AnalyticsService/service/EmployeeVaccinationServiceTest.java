@@ -98,4 +98,17 @@ public class EmployeeVaccinationServiceTest {
 
         verify(employeeVaccinations, times(1)).findByIdAndEmployeeId(employeeVaccinationId, employeeId);
     }
+
+    @Test
+    public void getEmployeeVaccinationWithIdAndEmployeeId_EmployeeVaccinationDoesNotExist_ThrowException() {
+        UUID employeeId = UUID.randomUUID();
+        UUID employeeVaccinationId = UUID.randomUUID();
+
+        Exception exception = assertThrows(EmployeeVaccinationNotFoundException.class, () -> employeeVaccinationService.getEmployeeVaccination(employeeId, employeeVaccinationId));
+        String expectedExceptionMessage = String.format("Unable to find employee vaccination %s from employee %s",
+                employeeVaccinationId, employeeId);
+
+        assertEquals(expectedExceptionMessage, exception.getMessage());
+        verify(employeeVaccinations, times(1)).findByIdAndEmployeeId(employeeVaccinationId, employeeId);
+    }
 }

@@ -2,6 +2,7 @@ package com.example.AnalyticsService.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -19,6 +20,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import csd.analytics.enumerator.HealthStatus;
 import csd.analytics.enumerator.VaccinationStatus;
+import csd.analytics.exception.EmployeeVaccinationNotFoundException;
 import csd.analytics.model.Employee;
 import csd.analytics.model.EmployeeVaccination;
 import csd.analytics.repository.EmployeeVaccinationRepository;
@@ -56,6 +58,23 @@ public class EmployeeVaccinationServiceTest {
         assertNotNull(employeeVaccinationsForEmployee);
         assertEquals(1, employeeVaccinationsForEmployee.size());
 
+        verify(employeeVaccinations, times(1)).findByEmployeeId(employeeId);
+    }
+
+    @Test
+    public void getEmployeeVaccinations_EmptyEmployeeVaccinations_ThrowException() {
+        UUID employeeId = UUID.randomUUID();
+        List<EmployeeVaccination> allEmployeeVaccinationsInEmployee = new ArrayList<EmployeeVaccination>();
+        VaccinationStatus vaccinationStatus = VaccinationStatus.NOT_VACCINATED;
+        HealthStatus healthStatus = HealthStatus.COVID;
+        Employee employee = new Employee(employeeId, allEmployeeVaccinationsInEmployee, null, "John Doe", vaccinationStatus, null, healthStatus, LocalDateTime.now(), true);
+
+        when(employeeVaccinations.findByEmployeeId(employeeId)).thenReturn(employee.getEmployeeVaccinations());
+
+        Exception exception = assertThrows(EmployeeVaccinationNotFoundException.class, () -> employeeVaccinationService.getEmployeeVaccinations(employeeId));
+        String expectedExceptionMessage = String.format("Employee %s does not have any vaccinations", employeeId);
+
+        assertEquals(expectedExceptionMessage, exception.getMessage());
         verify(employeeVaccinations, times(1)).findByEmployeeId(employeeId);
     }
 }

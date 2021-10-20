@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import csd.analytics.model.BarGraph;
 import csd.analytics.model.CovidData;
+import csd.analytics.model.LineGraph;
 
 @Service
 public class GraphServiceImpl implements GraphService {
@@ -40,6 +41,37 @@ public class GraphServiceImpl implements GraphService {
         }
 
         return barGraphs;
+    }
+
+    /**
+     * This method parses data from CovidData model which contains scraped data
+     * and converts them into the following:
+     * 1. Total number of deaths
+     * 2. Total number of recovered COVID-19 patients
+     * 3. Total number of COVID-19 cases
+     * 4. Daily number of imported COVID-19 cases
+     * 5. Daily number of local COVID-19 cases
+     * 6. Daily number of dormitory COVID-19 cases
+     * 
+     * @return List of LineGraph containing the metrics to be displayed on a component in frontend
+     */
+    @Override
+    public List<LineGraph> getLineGraph() {
+        List<CovidData> covidDatas = covidDataService.getAllCovidDataByOneMonth();
+        List<LineGraph> lineGraphs = new ArrayList<>();
+
+        for (CovidData covidData: covidDatas) {
+            lineGraphs.add(new LineGraph(
+                covidData.getTotalDeaths(), 
+                covidData.getTotalRecovered(),
+                covidData.getTotalCovidCases(),
+                covidData.getNewImportedCases(),
+                covidData.getNewCommunityCases(),
+                covidData.getNewDormitoryCases(),
+                covidData.getCreatedAt()
+            ));
+        }
+        return lineGraphs;
     }
     
     @Override

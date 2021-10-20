@@ -20,6 +20,6 @@ public class StatisticsController {
 
     @GetMapping("/statistics/{companyId}/turnover")
     public double getEmployeeTurnoverRate(@PathVariable(name = "companyId") UUID companyId) {
-        return statisticsService.employeeTurnoverRate(companyId);
+        return statisticsService.getEmployeeTurnoverRate(companyId);
     }
 }

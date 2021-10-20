@@ -25,7 +25,7 @@ public class StatisticsServiceImpl implements StatisticsService {
     }
 
     @Override
-    public double employeeTurnoverRate(UUID companyId) {
+    public double getEmployeeTurnoverRate(UUID companyId) {
         /**
          * 1. Get all departments from companyId
          * 2. Get all employees belonging to those departments
@@ -47,7 +47,7 @@ public class StatisticsServiceImpl implements StatisticsService {
     }
 
     @Override
-    public double employeeSickRate() {
+    public double getEmployeeSickRate() {
 
         return 0;
     }

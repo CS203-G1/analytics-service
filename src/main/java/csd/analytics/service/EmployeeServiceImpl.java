@@ -1,5 +1,6 @@
 package csd.analytics.service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -36,8 +37,34 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
+    public List<Employee> getAllEmployeesByDepartmentIds(List<UUID> departmentIds) {
+        return employeeRepository.findByDepartmentIdIn(departmentIds);
+    }
+
+    @Override
     public Employee getEmployeeByDepartmentId(UUID departmentId, UUID employeeId) {
         return employeeRepository.findByIdAndDepartmentId(departmentId, employeeId)
                 .orElseThrow(() -> new EmployeeNotFoundException(departmentId, employeeId));
+    }
+
+    @Override
+    public List<Employee> getEmployeesByCurrentMonth(UUID companyId) {
+        LocalDateTime end = LocalDateTime.now();
+        LocalDateTime start = end.withDayOfMonth(1);
+
+        return employeeRepository.findByCompanyIdAndCreatedAtBetween(companyId, start, end);
+    }
+
+    @Override
+    public List<Employee> getEmployeesByTwoWeeks(UUID companyId) {
+        LocalDateTime end = LocalDateTime.now();
+        LocalDateTime start = end.minusDays(14);
+
+        return employeeRepository.findByCompanyIdAndCreatedAtBetween(companyId, start, end);
+    }
+
+    @Override
+    public List<Employee> getAllEmployeesByCompanyId(UUID companyId) {
+        return employeeRepository.findAllByCompanyId(companyId);
     }
 }

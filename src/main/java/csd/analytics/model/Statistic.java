@@ -1,7 +1,6 @@
 package csd.analytics.model;
 
-import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.UUID;
 
 import javax.persistence.Column;
@@ -11,6 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -30,10 +31,10 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode
-public class Department implements Serializable {
+public class Statistic {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name="id")
+    @Column(name = "id")
     private UUID id;
 
     @JsonIgnore
@@ -41,10 +42,17 @@ public class Department implements Serializable {
     @JoinColumn(name="company_id")
     private Company company;
 
-    @Column(name="name")
-    private String name;
+    @Column(name = "num_of_sick")
+    private Integer numOfSick;
+
+    @Column(name = "num_of_healthy")
+    private Integer numOfHealthy;
+
+    @Column(name = "num_of_covid")
+    private Integer numOfCovid;
 
     @CreationTimestamp
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "created_at")
-    private LocalDateTime createdAt;
+    private Date createdAt;
 }

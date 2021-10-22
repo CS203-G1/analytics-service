@@ -1,6 +1,6 @@
 package csd.analytics.model;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -13,10 +13,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -46,12 +45,16 @@ public class Employee {
     @Column(name = "id")
     private UUID id;
 
-    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "employee", orphanRemoval = true, cascade = CascadeType.ALL)
     private List<EmployeeVaccination> employeeVaccinations;
 
-    @OneToOne
+    @ManyToOne
     @JsonIgnore
-    @JoinColumn(name = "department_id")
+    @ToString.Exclude
+    @JoinColumns({
+            @JoinColumn(name="company_id", referencedColumnName="company_id"),
+            @JoinColumn(name="department_id", referencedColumnName="id")
+    })
     private Department department;
 
     @Column(name = "name")
@@ -72,7 +75,9 @@ public class Employee {
     private HealthStatus healthStatus;
 
     @CreationTimestamp
-    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "created_at")
-    private Date createdAt;
+    private LocalDateTime createdAt;
+
+    @Column(name = "is_in_company")
+    private Boolean isInCompany = true;
 }

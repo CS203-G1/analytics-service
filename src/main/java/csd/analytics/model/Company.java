@@ -1,6 +1,6 @@
 package csd.analytics.model;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -11,10 +11,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -38,15 +34,16 @@ public class Company {
     @Column(name = "id")
     private UUID id;
 
-    @JsonIgnore
     @OneToMany(mappedBy = "company", cascade = CascadeType.ALL)
     private List<Department> departments;
+
+    @OneToMany(mappedBy = "company", cascade = CascadeType.ALL)
+    private List<Statistic> statistics;
 
     @Column(name = "name")
     private String name;
 
     @CreationTimestamp
-    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "created_at")
-    private Date createdAt;
+    private LocalDateTime createdAt;
 }

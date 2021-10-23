@@ -23,4 +23,4 @@ jobs:
           distribution: 'adopt'
           cache: maven
       - name: Run Unit Tests
-        run: mvn test -D DATABASE_URL=${{secrets.DATABASE_URL}} -D DATABASE_PORT=${{secrets.DATABASE_PORT}} -D DATABASE_NAME=${{secrets.DATABASE_NAME}} -D DATABASE_USERNAME=${{secrets.DATABASE_USERNAME}} -D DATABASE_PASSWORD=${{secrets.DATABASE_PASSWORD}}
+        run: mvn test -D DATABASE_URL=${{ secrets.DATABASE_URL }} -D DATABASE_PORT=${{ secrets.DATABASE_PORT }} -D DATABASE_NAME=${{ secrets.DATABASE_NAME }} -D DATABASE_USERNAME=${{ secrets.DATABASE_USERNAME }} -D DATABASE_PASSWORD=${{ secrets.DATABASE_PASSWORD }}

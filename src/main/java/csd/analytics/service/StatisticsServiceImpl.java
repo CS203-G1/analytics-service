@@ -45,10 +45,4 @@ public class StatisticsServiceImpl implements StatisticsService {
         }
         return turnoverRate;
     }
-
-    @Override
-    public double getEmployeeSickRate() {
-
-        return 0;
-    }
 }

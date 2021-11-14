@@ -9,12 +9,16 @@ import java.util.UUID;
 public class EmployeeVaccinationNotFoundException extends ResourceNotFoundException {
     private static final long serialVersionUID = 1L;
 
-    public EmployeeVaccinationNotFoundException(UUID employeevaccinationId, UUID employeeId) {
+    public EmployeeVaccinationNotFoundException(UUID employeeVaccinationId, UUID employeeId) {
         super(String.format("Unable to find employee vaccination %s from employee %s",
-                employeevaccinationId, employeeId));
+                employeeVaccinationId, employeeId));
     }
 
     public EmployeeVaccinationNotFoundException(UUID employeeId) {
         super(String.format("Employee %s does not have any vaccinations", employeeId));
+    }
+
+    public EmployeeVaccinationNotFoundException(String employeeVaccinationId) {
+        super(String.format("EmployeeVaccination %s does not exist", employeeVaccinationId));
     }
 }

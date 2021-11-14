@@ -1,4 +1,4 @@
-package com.example.AnalyticsService.service;
+package csd.analytics.AnalyticsService.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;

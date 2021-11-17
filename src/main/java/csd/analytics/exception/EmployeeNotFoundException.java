@@ -9,7 +9,16 @@ import java.util.UUID;
 public class EmployeeNotFoundException extends ResourceNotFoundException {
     private static final long serialVersionUID = 1L;
 
-    public EmployeeNotFoundException(UUID id) {
-        super("Could not find employee " + id);
+    public EmployeeNotFoundException(UUID departmentId, UUID employeeId) {
+        super(String.format("Could not find employee %s from department %s", employeeId, departmentId));
+    }
+
+    // Overloaded constructor for departments with no employees
+    public EmployeeNotFoundException(String departmentId) {
+        super(String.format("Department %s does not have any employees", departmentId));
+    }
+
+    public EmployeeNotFoundException(UUID employeeId) {
+        super(String.format("Unable to find employee %s", employeeId));
     }
 }

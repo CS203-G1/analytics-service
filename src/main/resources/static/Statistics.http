@@ -1,0 +1,3 @@
+# Get employee turnover rate
+GET http://localhost:8080/statistics/14f671b0-511e-43e4-86bb-6828f7a8e12d/turnover
+

@@ -1,5 +1,6 @@
 package csd.analytics.service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -19,36 +20,51 @@ public class EmployeeServiceImpl implements EmployeeService {
         this.employeeRepository = employeeRepository;
     }
 
-    @Override
-    public Employee addEmployee(Employee employee) {
-        return employeeRepository.save(employee);
-    }
-
-    @Override
-    public List<Employee> getAllEmployees() {
-        return employeeRepository.findAll();
-    }
-
+    // Method is created for EmployeeVaccination service
     @Override
     public Employee getEmployeeById(UUID employeeId) {
         return employeeRepository.findById(employeeId).orElseThrow(() -> new EmployeeNotFoundException(employeeId));
     }
 
     @Override
-    public Employee updateEmployeeById(UUID employeeId, Employee employee) {
-        return employeeRepository.findById(employeeId).map(oldEmployee -> {
-            oldEmployee.setVaccinationStatus(employee.getVaccinationStatus());
-            oldEmployee.setVaccinationBrand(employee.getVaccinationBrand());
-            oldEmployee.setHealthStatus(employee.getHealthStatus());
+    public List<Employee> getAllEmployeesByDepartmentId(UUID departmentId) {
+        List<Employee> employees = employeeRepository.findByDepartmentId(departmentId);
 
-            return employeeRepository.save(oldEmployee);
-        }).orElseThrow(() -> new EmployeeNotFoundException(employeeId));
+        if (employees.isEmpty()) {
+            throw new EmployeeNotFoundException(departmentId.toString());
+        }
+        return employees;
     }
 
     @Override
-    public void deleteEmployeeById(UUID employeeId) {
-        Employee employee = getEmployeeById(employeeId);
-        
-        employeeRepository.delete(employee);
+    public List<Employee> getAllEmployeesByDepartmentIds(List<UUID> departmentIds) {
+        return employeeRepository.findByDepartmentIdIn(departmentIds);
+    }
+
+    @Override
+    public Employee getEmployeeByDepartmentId(UUID departmentId, UUID employeeId) {
+        return employeeRepository.findByIdAndDepartmentId(departmentId, employeeId)
+                .orElseThrow(() -> new EmployeeNotFoundException(departmentId, employeeId));
+    }
+
+    @Override
+    public List<Employee> getEmployeesByCurrentMonth(UUID companyId) {
+        LocalDateTime end = LocalDateTime.now();
+        LocalDateTime start = end.withDayOfMonth(1);
+
+        return employeeRepository.findByCompanyIdAndCreatedAtBetween(companyId, start, end);
+    }
+
+    @Override
+    public List<Employee> getEmployeesByTwoWeeks(UUID companyId) {
+        LocalDateTime end = LocalDateTime.now();
+        LocalDateTime start = end.minusDays(14);
+
+        return employeeRepository.findByCompanyIdAndCreatedAtBetween(companyId, start, end);
+    }
+
+    @Override
+    public List<Employee> getAllEmployeesByCompanyId(UUID companyId) {
+        return employeeRepository.findAllByCompanyId(companyId);
     }
 }

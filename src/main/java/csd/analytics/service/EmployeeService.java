@@ -1,18 +1,16 @@
 package csd.analytics.service;
 
-import csd.analytics.model.Employee;
-
 import java.util.List;
 import java.util.UUID;
 
+import csd.analytics.model.Employee;
+
 public interface EmployeeService {
-    Employee addEmployee(Employee employee);
-
-    List<Employee> getAllEmployees();
-
-    Employee getEmployeeById(UUID id);
-
-    Employee updateEmployeeById(UUID id, Employee employee);
-
-    void deleteEmployeeById(UUID id);
+    List<Employee> getAllEmployeesByDepartmentId(UUID departmentId);
+    List<Employee> getAllEmployeesByDepartmentIds(List<UUID> departmentIds);
+    List<Employee> getAllEmployeesByCompanyId(UUID companyId);
+    Employee getEmployeeByDepartmentId(UUID departmentId, UUID employeeId);
+    Employee getEmployeeById(UUID employeeId);
+    List<Employee> getEmployeesByCurrentMonth(UUID companyId);
+    List<Employee> getEmployeesByTwoWeeks(UUID companyId);
 }
